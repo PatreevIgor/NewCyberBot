@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render 'partials/home_page/head_home_page.html' %>
+
+  <body>
+    <%= render 'partials/home_page/default_body_home_page.html' %>
+    <div class="container">
+      <div class="starter-template">
+        <h1>Super-puper NewCyberBot </h1>
+        <p class="lead">
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <%= form_tag(button_start_work_index_path, method: 'post') do %>
+              <% end %>
+              <%= form_tag(button_start_work_index_path, method: 'post') do %>
+                <%= submit_tag('Start !', class: 'btn btn-primary') %>
+              <% end %>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
