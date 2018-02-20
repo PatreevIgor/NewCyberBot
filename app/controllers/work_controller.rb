@@ -2,6 +2,6 @@
 
 class WorkController < ApplicationController
   def button_start
-    # here will be some code
+    CyberBot.start_work
   end
 end
