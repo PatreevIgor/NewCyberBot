@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'json'
+require 'uri'
+require 'net/http'
 
 describe Price do
   subject { described_class.new }
@@ -41,6 +44,29 @@ describe Price do
   describe '#get_min_price' do
     it 'returns min item price' do
       expect(subject.get_min_price(item_hash)).to eq(1901)
+    end
+  end
+
+  context 'only #get_price_of_sell and #get_price_of_buy methods' do
+    let(:price_of_buy) do
+      JSON.parse(Net::HTTP.get_response(URI.parse('https://market.dota2.net/api/BestBuyOffer/'\
+      "57939697_0/?key=#{Rails.application.secrets.your_secret_key}")).body)['best_offer'].to_i
+    end
+    let(:price_of_sell) do
+      JSON.parse(Net::HTTP.get_response(URI.parse('https://market.dota2.net/api/BestSellOffer/'\
+      "57939697_0/?key=#{Rails.application.secrets.your_secret_key}")).body)['best_offer'].to_i
+    end
+
+    describe '#get_price_of_buy' do
+      it 'returns price of buy item' do
+        expect(subject.get_price_of_buy(item_hash)).to eq(price_of_buy)
+      end
+    end
+
+    describe '#get_price_of_sell' do
+      it 'returns price of sell item' do
+        expect(subject.get_price_of_sell(item_hash)).to eq(price_of_sell)
+      end
     end
   end
 end

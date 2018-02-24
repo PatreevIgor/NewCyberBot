@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 class Constant
-  ITEM_HISTORY_URL  = 'https://market.dota2.net/api/ItemHistory/%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
+  ITEM_HISTORY_URL    = 'https://market.dota2.net/api/ItemHistory/%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
+  BEST_BUY_OFFER_URL  = 'https://market.dota2.net/api/BestBuyOffer/'\
+                        '%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
+  BEST_SELL_OFFER_URL = 'https://market.dota2.net/api/BestSellOffer/'\
+                        '%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
 
-  HASH_MIN_KEY      = 'min'
-  HASH_MAX_KEY      = 'max'
-  HASH_AVERAGE_KEY  = 'average'
+  HASH_MIN_KEY                   = 'min'
+  HASH_MAX_KEY                   = 'max'
+  HASH_AVERAGE_KEY               = 'average'
+  ITEM_HASH_BEST_OFFER_KEY       = 'best_offer'
 
   # NEW_ITEMS_STATUS               = 'new'.freeze
   # MAIN_ITEMS_STATUS              = 'main'.freeze
@@ -18,7 +23,6 @@ class Constant
   # ITEM_HASH_INSTANCE_ID_KEY      = 'instanceid'.freeze
   # ITEM_HASH_PRICE_KEY            = 'price'.freeze
   # ITEM_HASH_HASH_NAME_KEY        = 'hash_name'.freeze
-  # ITEM_HASH_BEST_OFFER_KEY       = 'best_offer'.freeze
   # ITEM_INFO_HASH_MIN_PRICE_KEY   = 'min_price'.freeze
 
   # COUNT_FOUND_ITEMS_TEXT         = 'Found %{count_item} new items!'.freeze
@@ -30,10 +34,6 @@ class Constant
   # PUT_UP_ALL_BOUGHT_ITEMS_TEXT   = 'Put up all bought items!'.freeze
 
   # LAST_50_SALES_URL              = 'https://market.dota2.net/history/json/'.freeze
-  # BEST_BUY_OFFER_URL             = 'https://market.dota2.net/api/BestBuyOffer/'\
-  #                                  '%{class_id}_%{instance_id}/?key=%{your_secret_key}'.freeze
-  # BEST_SELL_OFFER_URL            = 'https://market.dota2.net/api/BestSellOffer/'\
-  #                                  '%{class_id}_%{instance_id}/?key=%{your_secret_key}'.freeze
   # DELETE_ORDERS_URL              = 'https://market.dota2.net/api/DeleteOrders/?key=%{your_secret_key}'.freeze
   # CREATE_ORDER_URL               = 'https://market.dota2.net/api/ProcessOrder/'\
   #                                  '%{class_id}/%{instance_id}/%{price}/?key=%{your_secret_key}'.freeze
