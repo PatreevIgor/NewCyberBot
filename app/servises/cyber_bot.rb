@@ -11,18 +11,25 @@ class CyberBot
   private
 
   def perform_daily_tasks
-    ItemsFinder.find_actuall_items
-
-    UsersInformator.inform_user_about_sell_items
+    item_finder.find_actuall_items
+    users_informator.inform_user_about_sell_items
   end
 
   def mode_change_time
-    DateTime.now.change({ hour: 6, min: 30, sec: 0 })
+    Time.now.change(hour: 6, min: 30, sec: 0)
   end
 
   def perform_night_tasks
     ItemsEditor.delete_all_items_from_trade
 
     ItemsEditor.actualize_item_status
+  end
+
+  def item_finder
+    @item_finder ||= ItemsFinder.new
+  end
+
+  def users_informator
+    @users_informator ||= ItemsFinder.new
   end
 end
