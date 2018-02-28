@@ -3,7 +3,7 @@
 class ItemsFinder
   def find_actuall_items
     last_50_sales.each do |item_hash|
-      if item_hash.filter_conditions?
+      if conditions_checker.check_conditions?(item_hash)
         # return actual items if they exist
       end
     end
@@ -15,18 +15,7 @@ class ItemsFinder
     Connection.send_request(Constant::LAST_50_SALES_URL)
   end
 
-  # def filter_conditions?
-  #   # if CoefficientCalculator.coefficient_profit             > 80 &&
-  #   #    coefficient_current_state      > 80
-  #   #    coefficient_frequency_purchase > 80
-  #   #    item_not_exists?(params)
-  #   #   true
-  #   # else
-  #   #   false
-  #   # end
-  # end
-
-  def item_not_exists?(params)
-    # some code
+  def conditions_checker
+    @conditions_checker ||= ConditionsChecker.new
   end
 end

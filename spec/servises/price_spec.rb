@@ -52,6 +52,7 @@ describe Price do
       JSON.parse(Net::HTTP.get_response(URI.parse('https://market.dota2.net/api/BestBuyOffer/'\
       "57939697_0/?key=#{Rails.application.secrets.your_secret_key}")).body)['best_offer'].to_i
     end
+
     let(:price_of_sell) do
       JSON.parse(Net::HTTP.get_response(URI.parse('https://market.dota2.net/api/BestSellOffer/'\
       "57939697_0/?key=#{Rails.application.secrets.your_secret_key}")).body)['best_offer'].to_i

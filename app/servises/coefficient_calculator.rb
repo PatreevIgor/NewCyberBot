@@ -7,7 +7,7 @@
 
 class CoefficientCalculator
   def coefficient_profit(item_hash)
-    # some code
+    clean_benefit(item_hash) >= 2000 ? 100 : 0
   end
 
   def coefficient_current_state(item_hash)
@@ -19,6 +19,10 @@ class CoefficientCalculator
   end
 
   private
+
+  def clean_benefit(item_hash)
+    price.price_of_sell(item_hash) - price.price_of_buy(item_hash) - (price.price_of_sell(item_hash) / 100 * 10)
+  end
 
   def price
     @price ||= Price.new
