@@ -29,25 +29,25 @@ describe Price do
       'id'         => '41787754' }
   end
 
-  describe '#get_max_price' do
+  describe '#max_price' do
     it 'returns max item price' do
-      expect(subject.get_max_price(item_hash)).to eq(2900)
+      expect(subject.max_price(item_hash)).to eq(2900)
     end
   end
 
-  describe '#get_middle_price' do
+  describe '#middle_price' do
     it 'returns middle item price' do
-      expect(subject.get_middle_price(item_hash)).to eq(2143)
+      expect(subject.middle_price(item_hash)).to eq(2143)
     end
   end
 
-  describe '#get_min_price' do
+  describe '#min_price' do
     it 'returns min item price' do
-      expect(subject.get_min_price(item_hash)).to eq(1901)
+      expect(subject.min_price(item_hash)).to eq(1901)
     end
   end
 
-  context 'only #get_price_of_sell and #get_price_of_buy methods' do
+  context '#price_of_sell / #price_of_buy methods' do
     let(:price_of_buy) do
       JSON.parse(Net::HTTP.get_response(URI.parse('https://market.dota2.net/api/BestBuyOffer/'\
       "57939697_0/?key=#{Rails.application.secrets.your_secret_key}")).body)['best_offer'].to_i
@@ -60,13 +60,29 @@ describe Price do
 
     describe '#get_price_of_buy' do
       it 'returns price of buy item' do
-        expect(subject.get_price_of_buy(item_hash)).to eq(price_of_buy)
+        expect(subject.price_of_buy(item_hash)).to eq(price_of_buy)
       end
     end
 
     describe '#get_price_of_sell' do
       it 'returns price of sell item' do
-        expect(subject.get_price_of_sell(item_hash)).to eq(price_of_sell)
+        expect(subject.price_of_sell(item_hash)).to eq(price_of_sell)
+      end
+    end
+  end
+
+  context 'methods for calculating the difference' do
+    describe '#diff_price_of_sell_and_min' do
+      before { allow_any_instance_of(described_class).to receive(:price_of_sell).with(item_hash).and_return(2000) }
+
+      it 'returns 99 (2000 - 1901)' do
+        expect(subject.diff_price_of_sell_and_min(item_hash)).to eq(99)
+      end
+    end
+
+    describe '#diff_middle_and_min' do
+      it 'returns 242 (2143 - 1901)' do
+        expect(subject.diff_middle_and_min(item_hash)).to eq(242)
       end
     end
   end

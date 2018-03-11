@@ -27,6 +27,14 @@ class Price
     price(url)
   end
 
+  def diff_middle_and_min(item_hash)
+    middle_price(item_hash) - min_price(item_hash)
+  end
+
+  def diff_price_of_sell_and_min(item_hash)
+     price_of_sell(item_hash) - min_price(item_hash)
+  end
+
   private
 
   def item_history(item_hash)
