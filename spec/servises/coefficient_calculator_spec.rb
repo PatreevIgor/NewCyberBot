@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'pry'
+require 'helpers'
+
+RSpec.configure do |c|
+  c.include Helpers
+end
 
 describe CoefficientCalculator do
   subject { described_class.new }
@@ -79,6 +83,45 @@ describe CoefficientCalculator do
 
       it 'returns 0' do
         expect(subject.coefficient_current_state(item_hash)).to eq(0)
+      end
+    end
+  end
+
+  describe '#coefficient_frequency_purchase' do
+    context 'when coeff equal 10' do
+      let(:history_of_sales) do
+        [{ 'l_time' => five_days_ago },
+         { 'l_time' => one_week_ago },
+         { 'l_time' => two_weeks_ago },
+         { 'l_time' => more_month_days_ago }]
+      end
+
+      it 'returns 10' do
+        expect(subject.coefficient_frequency_purchase(history_of_sales)).to eq(10)
+      end
+    end
+
+    context 'when coeff equal 6' do
+      let(:history_of_sales) do
+        [{ 'l_time' => one_week_ago },
+         { 'l_time' => two_weeks_ago },
+         { 'l_time' => more_month_days_ago }]
+      end
+
+      it 'returns 6' do
+        expect(subject.coefficient_frequency_purchase(history_of_sales)).to eq(6)
+      end
+    end
+
+    context 'when coeff equal 3' do
+      let(:history_of_sales) do
+        [{ 'l_time' => one_week_ago },
+         { 'l_time' => one_week_ago_other_time },
+         { 'l_time' => more_month_days_ago }]
+      end
+
+      it 'returns 3' do
+        expect(subject.coefficient_frequency_purchase(history_of_sales)).to eq(3)
       end
     end
   end

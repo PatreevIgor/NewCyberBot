@@ -5,7 +5,7 @@ class ConditionsChecker
     if coefficient_calculator.coefficient_profit(item_hash)             > 80 &&
        coefficient_calculator.coefficient_current_state(item_hash)      > 80 &&
        coefficient_calculator.coefficient_frequency_purchase(item_hash) > 80 &&
-       item_checker.item_not_exists?(item_hash)
+       data_dase_editor.item_not_exists?(item_hash)
       true
     else
       false
@@ -18,7 +18,7 @@ class ConditionsChecker
     @coefficient_calculator ||= CoefficientCalculator.new
   end
 
-  def item_checker
-    @item_checker ||= ItemChecker.new
+  def data_dase_editor
+    @data_dase_editor ||= DataBaseEditor.new
   end
 end

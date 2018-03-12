@@ -32,7 +32,7 @@ class Price
   end
 
   def diff_price_of_sell_and_min(item_hash)
-     price_of_sell(item_hash) - min_price(item_hash)
+    price_of_sell(item_hash) - min_price(item_hash)
   end
 
   private
