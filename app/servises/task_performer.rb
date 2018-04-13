@@ -16,11 +16,11 @@ class TaskPerformer
   private
 
   def item_finder
-    @item_finder ||= ItemsFinder.new
+    @item_finder ||= ItemFinder.new
   end
 
   def users_informator
-    @users_informator ||= ItemsFinder.new
+    @users_informator ||= UserInformator.new
   end
 
   def items_editor

@@ -6,6 +6,8 @@ class Constant
                         '%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
   BEST_SELL_OFFER_URL = 'https://market.dota2.net/api/BestSellOffer/'\
                         '%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
+  ITEM_LINK_URL       = 'https://market.dota2.net/item/'\
+                        '%<class_id>s-%<instance_id>s-%<i_market_hash_name>s/'
 
   HASH_MIN_KEY                   = 'min'
   HASH_MAX_KEY                   = 'max'
@@ -37,8 +39,7 @@ class Constant
   # DELETE_ORDERS_URL              = 'https://market.dota2.net/api/DeleteOrders/?key=%{your_secret_key}'.freeze
   # CREATE_ORDER_URL               = 'https://market.dota2.net/api/ProcessOrder/'\
   #                                  '%{class_id}/%{instance_id}/%{price}/?key=%{your_secret_key}'.freeze
-  # ITEM_LINK_URL                  = 'https://market.dota2.net/item/'\
-  #                                  '%{class_id}-%{instance_id}-%{i_market_hash_name}/'.freeze
+
   # NOT_SALE_ITEMS_URL             = 'https://market.dota2.net/api/GetInv/?key=%{your_secret_key}'.freeze
   # SALE_ITEMS_URL                 = 'https://market.dota2.net/api/GetMySellOffers/?key=%{your_secret_key}'.freeze
   # ITEM_INFORMATION_URL           = 'https://market.dota2.net/api/ItemInfo/'\
