@@ -16,13 +16,7 @@ class ItemValidator
   end
 
   def item_not_exists?(item_hash)
-    if Item.exists?(link: format(Constant::ITEM_LINK_URL, class_id:           params[:class_id],
-                                                          instance_id:        params[:instance_id], 
-                                                          i_market_hash_name: params[:hash_name].gsub(' ','+'))
-      false
-    else
-      true
-    end
+    Item.exists?(link: link_generator.generate_link(item_hash)) ? false : true
   end
 
   def item_on_sale?(item_hash)
@@ -32,5 +26,9 @@ class ItemValidator
 
   def coefficient_calculator
     @coefficient_calculator ||= CoefficientCalculator.new
+  end
+  
+  def link_generator
+    @link_generator ||= LinkGenerator.new
   end
 end
