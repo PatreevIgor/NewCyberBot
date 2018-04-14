@@ -6,9 +6,9 @@ class ItemEditor
                 instance_id: item_hash[:instance_id],
                 hash_name:   item_hash[:hash_name],
                 price:       item_hash[:current_price],
-                link:        Constant::ITEM_LINK_URL % { class_id:           item_hash[:class_id],
-                                                         instance_id:        item_hash[:instance_id], 
-                                                         i_market_hash_name: item_hash[:hash_name].gsub(' ','+') },
+                link:        format(Constant::ITEM_LINK_URL, class_id:           item_hash[:class_id],
+                                                             instance_id:        item_hash[:instance_id], 
+                                                             i_market_hash_name: item_hash[:hash_name].gsub(' ','+')),
                 status:      Constant::NEW_ITEMS_STATUS)
   end
 
@@ -20,5 +20,3 @@ class ItemEditor
     # some code
   end
 end
-
-
