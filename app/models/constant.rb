@@ -10,12 +10,15 @@ class Constant
                         '%<class_id>s-%<instance_id>s-%<i_market_hash_name>s/'
   DELETE_ORDERS_URL   = 'https://market.dota2.net/api/DeleteOrders/?key=%<your_secret_key>s'
     
-  HASH_MIN_KEY                   = 'min'
-  HASH_MAX_KEY                   = 'max'
-  HASH_AVERAGE_KEY               = 'average'
-  ITEM_HASH_BEST_OFFER_KEY       = 'best_offer'
+  HASH_MIN_KEY             = 'min'
+  HASH_MAX_KEY             = 'max'
+  HASH_AVERAGE_KEY         = 'average'
+  ITEM_HASH_BEST_OFFER_KEY = 'best_offer'
 
-  # NEW_ITEMS_STATUS               = 'new'.freeze
+  NEW_ITEMS_STATUS            = 'new'
+  ACTUALIZED_ITEMS_STATUS     = 'actualized'
+  NOT_ACTUALIZED_ITEMS_STATUS = 'not actualized'
+
   # MAIN_ITEMS_STATUS              = 'main'.freeze
   # ACTUALLY_MAIN_ITEMS_STATUS     = 'main_actually'.freeze
   # NOT_ACTUALLY_MAIN_ITEMS_STATUS = 'main_not_actually'.freeze
