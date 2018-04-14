@@ -8,7 +8,8 @@ class Constant
                         '%<class_id>s_%<instance_id>s/?key=%<your_secret_key>s'
   ITEM_LINK_URL       = 'https://market.dota2.net/item/'\
                         '%<class_id>s-%<instance_id>s-%<i_market_hash_name>s/'
-
+  DELETE_ORDERS_URL   = 'https://market.dota2.net/api/DeleteOrders/?key=%<your_secret_key>s'
+    
   HASH_MIN_KEY                   = 'min'
   HASH_MAX_KEY                   = 'max'
   HASH_AVERAGE_KEY               = 'average'
@@ -36,7 +37,6 @@ class Constant
   # PUT_UP_ALL_BOUGHT_ITEMS_TEXT   = 'Put up all bought items!'.freeze
 
   # LAST_50_SALES_URL              = 'https://market.dota2.net/history/json/'.freeze
-  # DELETE_ORDERS_URL              = 'https://market.dota2.net/api/DeleteOrders/?key=%{your_secret_key}'.freeze
   # CREATE_ORDER_URL               = 'https://market.dota2.net/api/ProcessOrder/'\
   #                                  '%{class_id}/%{instance_id}/%{price}/?key=%{your_secret_key}'.freeze
 
