@@ -14,11 +14,23 @@ class ItemEditor
     # some code
   end
 
-  def actualize_item_status
+  def actualize_not_sale_items
+    not_sale_items = Items.where(status: Constant::NOT_ACTUALIZED_ITEMS_STATUS)
+    not_sale_items.each do |item|
+      item_validator.item_profitable?(item_hash) ? item.status = 'profitable' : item.status = 'not profitable'
+    end
+    # return items with status "actualized"
+  end
+  
+  def actualize_all_items
     # some code
   end
   
   private
+  
+  def convert_db_item_to_item_hash(item)
+    { item.///////////////////////////////////////// }
+  end
   
   def link_generator
     @link_generator ||= LinkGenerator.new
