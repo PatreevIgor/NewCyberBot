@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class Seller
-
   def create_orders(actual_items)
+    actual_items.each do |item|
+      Connection.send_request(format (Constant::CREATE_ORDER_URL, class_id:        item[class_id],
+                                                                  instance_id:     item[instance_id],
+                                                                  price:           item[price],          
+                                                                  your_secret_key: Rails.application.secrets.your_secret_key))
+    end
     
     users_informator.inform_user_about_created_order
   end
@@ -16,4 +21,16 @@ class Seller
   def users_informator
     @users_informator ||= UserInformator.new
   end
+end
+
+
+
+
+
+
+  def create_order_item(class_id, instance_id, price)
+    Connection.send_request(Constant::CREATE_ORDER_URL % { class_id:        class_id,
+                                                           instance_id:     instance_id,
+                                                           price:           price,          
+                                                           your_secret_key: Rails.application.secrets.your_secret_key })
 end
