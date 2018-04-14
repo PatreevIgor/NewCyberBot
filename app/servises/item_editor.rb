@@ -6,9 +6,7 @@ class ItemEditor
                 instance_id: item_hash[:instance_id],
                 hash_name:   item_hash[:hash_name],
                 price:       item_hash[:current_price],
-                link:        format(Constant::ITEM_LINK_URL, class_id:           item_hash[:class_id],
-                                                             instance_id:        item_hash[:instance_id], 
-                                                             i_market_hash_name: item_hash[:hash_name].gsub(' ','+')),
+                link:        link_generator.generate_link(item_hash),
                 status:      Constant::NEW_ITEMS_STATUS)
   end
 
@@ -18,5 +16,11 @@ class ItemEditor
 
   def actualize_item_status
     # some code
+  end
+  
+  private
+  
+  def link_generator
+    @link_generator ||= LinkGenerator.new
   end
 end
