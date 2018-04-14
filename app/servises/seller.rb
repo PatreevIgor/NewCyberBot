@@ -2,12 +2,14 @@
 
 class Seller
 
-  def create_order
+  def create_orders(actual_items)
+    
+    users_informator.inform_user_about_created_order
   end
 
   private
-
-  # def items_editor
-  #   @items_editor ||= ItemsEditor.new
-  # end
+    
+  def users_informator
+    @users_informator ||= UserInformator.new
+  end
 end
