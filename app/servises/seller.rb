@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Seller
-  def create_buy_orders(actual_items)
-    actual_items.each do |item|
+  def create_buy_orders(profitable_orders)
+    profitable_orders.each do |order|
       Connection.send_request(format (Constant::CREATE_ORDER_URL, class_id:        item[class_id],
                                                                   instance_id:     item[instance_id],
                                                                   price:           item[price],          

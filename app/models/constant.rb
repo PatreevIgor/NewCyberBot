@@ -21,6 +21,7 @@ class Constant
   NOT_ACTUALIZED_ORDER_STATUS = 'not_actualized_order'
   CREATED_ORDER_STATUS        = 'created_order'
   UNPROFITABLE_ORDER_STATUS   = 'unprofitable_order'
+  PROFITABLE_ORDER_STATUS     = 'profitable_order'
 
   # ITEM STATUSES
   ON_SALE_ITEMS_STATUS      = 'on_sale'
