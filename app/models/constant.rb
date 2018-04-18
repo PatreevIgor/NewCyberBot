@@ -25,8 +25,8 @@ class Constant
   PROFITABLE_ORDER_STATUS     = 'profitable_order'
 
   # ITEM STATUSES
-  ON_SALE_ITEMS_STATUS      = 'on_sale'
-  IN_INVENTARY_ITEMS_STATUS = 'in_inventory'
+  ON_SALE_ITEM_STATUS      = 'on_sale'
+  IN_INVENTARY_ITEM_STATUS = 'in_inventory'
 
   # ITEM_HASH_CLASS_ID_KEY         = 'classid'
   # ITEM_HASH_INSTANCE_ID_KEY      = 'instanceid'
