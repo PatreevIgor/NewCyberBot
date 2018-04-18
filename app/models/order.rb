@@ -19,6 +19,12 @@ class Order < ApplicationRecord
     end
   end
 
+  
+def order.order_not_exists?(item_hash)
+    Item.exists?(link: link_generator.generate_link(item_hash)) ? false : true
+end
+  
+  
   private
 
   def item_validator
