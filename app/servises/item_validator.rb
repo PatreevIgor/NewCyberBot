@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Validator
+class ItemValidator
   def profitable?(info_hash)
     if coefficient_calculator.coefficient_profit(item_hash)             > 80 &&
        coefficient_calculator.coefficient_current_state(item_hash)      > 80 &&
