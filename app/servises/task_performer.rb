@@ -9,9 +9,8 @@ class TaskPerformer
   end
 
   def perform_night_tasks
-    seller.delete_all_items_from_trade
-
-    actualize_orders_and_items
+    Item.delete_all_items_from_trade
+    Item.actualize_all_items
   end
 
   private
