@@ -10,7 +10,8 @@ class Constant
   ITEM_LINK_URL       = 'https://market.dota2.net/item/'\
                         '%<class_id>s-%<instance_id>s-%<i_market_hash_name>s/'
   DELETE_ORDERS_URL   = 'https://market.dota2.net/api/DeleteOrders/?key=%<your_secret_key>s'
-
+  REMOVE_ALL_URL      = 'https://market.dota2.net/api/RemoveAll/?key=%<your_secret_key>s'
+  
   # HASH KEYS
   HASH_MIN_KEY        = 'min'
   HASH_MAX_KEY        = 'max'
@@ -24,8 +25,8 @@ class Constant
   PROFITABLE_ORDER_STATUS     = 'profitable_order'
 
   # ITEM STATUSES
-  ON_SALE_ITEMS_STATUS      = 'on_sale'
-  IN_INVENTARY_ITEMS_STATUS = 'in_inventory'
+  ON_SALE_ITEM_STATUS      = 'on_sale'
+  IN_INVENTARY_ITEM_STATUS = 'in_inventory'
 
   # ITEM_HASH_CLASS_ID_KEY         = 'classid'
   # ITEM_HASH_INSTANCE_ID_KEY      = 'instanceid'
@@ -53,6 +54,5 @@ class Constant
   # UPDATE_ORDER_URL               = 'https://market.dota2.net/api/UpdateOrder/'\
   #                                  '%{class_id}/%{instance_id}/%{price}/?key=%{your_secret_key}'.freeze
   # SET_PRICE_URL            = 'https://market.dota2.net/api/SetPrice/%{ui_id}/%{price}/?key=%{your_secret_key}'.freeze
-  # REMOVE_ALL_URL           = 'https://market.dota2.net/api/RemoveAll/?key=%{your_secret_key}'.freeze
   # UPDATE_INVENTARY_URL     = 'https://market.dota2.net/api/UpdateInventory/?key=%{your_secret_key}'.freeze
 end

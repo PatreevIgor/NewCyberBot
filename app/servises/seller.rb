@@ -24,4 +24,8 @@ class Seller
   def users_informator
     @users_informator ||= UserInformator.new
   end
+  
+  def price
+    @price ||= Price.new
+  end
 end

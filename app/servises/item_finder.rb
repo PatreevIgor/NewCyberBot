@@ -3,10 +3,10 @@
 class ItemFinder
   def find_actuall_items
     last_50_sales.each do |item_hash|
-      if validator.profitable?(item_hash) && item.item_not_exists?(item_hash)
-        item.create_item(item_hash)
+      if item_validator.item_profitable?(item_hash) && order.order_not_exists?(item_hash) 
+                                                    && item_validator.price_interval_is_valid?(item_hash)
+        order.create_order(item_hash)
       end
-      seller.create_order if item_validator.item_on_sale?(item_hash)
     end
   end
 
@@ -16,8 +16,8 @@ class ItemFinder
     Connection.send_request(Constant::LAST_50_SALES_URL)
   end
 
-  def validator
-    @validator ||= Validator.new
+  def item_validator
+    @item_validator ||= ItemValidator.new
   end
 
   def item
