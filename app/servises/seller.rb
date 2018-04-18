@@ -5,7 +5,7 @@ class Seller
     profitable_orders.each do |order|
       Connection.send_request(format (Constant::CREATE_ORDER_URL, class_id:        item[class_id],
                                                                   instance_id:     item[instance_id],
-                                                                  price:           price............,          
+                                                                  price:           item[price],          
                                                                   your_secret_key: Rails.application.secrets.your_secret_key))
     end
     
