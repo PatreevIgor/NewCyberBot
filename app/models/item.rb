@@ -16,8 +16,9 @@ class Item < ApplicationRecord
     # return items with status "actualized"
   end
 
-  def delete_all_items_from_trade
-    # some code
+  def self.delete_all_items_from_trade
+    Connection.send_request(format(Constant::REMOVE_ALL_URL, your_secret_key: Rails.application.secrets.your_secret_key))
+    change_items_status_to_in_inventary
   end
 
   def item_not_exists?(item_hash)
@@ -29,6 +30,15 @@ class Item < ApplicationRecord
 
   private
 
+  def change_items_status_to_in_inventary
+    on_sale_items = Item.where(status: ON_SALE_ITEM_STATUS)
+    if on_sale_items.exist?
+      on_sale_items.each do |item|
+        item.status = Constant::IN_INVENTARY_ITEM_STATUS
+      end
+    end
+  end
+  
   def link_generator
     @link_generator ||= LinkGenerator.new
   end
