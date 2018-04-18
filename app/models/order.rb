@@ -3,7 +3,7 @@ class Order < ApplicationRecord
     Item.create(class_id:    item_hash[:class_id],
                 instance_id: item_hash[:instance_id],
                 hash_name:   item_hash[:hash_name],
-                price:       item_hash[:current_price],
+                price:       price.price_of_buy_for_order(item_hash),
                 link:        link_generator.generate_link(item_hash),
                 status:      Constant::NEW_ITEMS_STATUS)
   end
