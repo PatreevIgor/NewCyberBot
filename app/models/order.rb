@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  def create_order(item_hash)
+  def save_order(item_hash)
     Item.create(class_id:    item_hash[:class_id],
                 instance_id: item_hash[:instance_id],
                 hash_name:   item_hash[:hash_name],
