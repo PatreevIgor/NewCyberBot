@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Price
+  
+  # ------------- for creating orders ----------------------------------------
+  
   def price_of_sell_for_order(item) # цена продажи вещи на создаваемом ордере
     if item_never_sold?(item)
       price_of_never_sold_order
@@ -81,15 +84,7 @@ class Price
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  # ------------- for count coefficients ----------------------------------------
   
   def max_price(item_hash) # максимальная цена, используется для расчета коэффициентов
     item_history(item_hash)[Constant::HASH_MAX_KEY]
