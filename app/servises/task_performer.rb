@@ -2,7 +2,7 @@
 
 class TaskPerformer
   def perform_daily_tasks
-    actualize_not_actualized_orders         # из статуса NOT_ACTUALIZED_ORDER_STATUS изменить на PROFITABLE_ORDER_STATUS или UN*
+    actualize_not_actualized_orders         # из статуса NOT_ACTUALIZED_ORDER_STATUS изменить на PROFITABLE_ORDER_STATUS или UNPROFITABLE_ORDER_STATUS
     create_buy_orders_for_profitable_orders # создать ордера на покупку, только для вещей со статусом PROFITABLE_ORDER_STATUS, изменить на статус CREATED_ORDER_STATUS
     item_finder.find_actuall_items          # искать новые вещи, найденным присвоить статус PROFITABLE_ORDER_STATUS
     # users_informator.inform_user_about_sell_items
