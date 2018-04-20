@@ -46,7 +46,7 @@ class Constant
   IN_INVENTARY_ITEM_STATUS = 'in_inventory'
 
   # --------------------------- TEXTS -----------------------------------
-  COUNT_FOUND_ITEMS_TEXT       = 'Found %{count_item} new items!'
+  COUNT_FOUND_ITEMS_TEXT       = 'Found %<count_item>s new items!'
   ITEM_CREATED_TEXT            = 'Item created!'
   REMOVED_ALL_TRADES_TEXT      = 'Removed all trades!'
   WAIT_15_SEK_TEXT             = 'Wait 15 sec!'
