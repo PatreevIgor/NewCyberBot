@@ -81,6 +81,12 @@ class Price
     sprintf("%.0f", (item.price_of_buy / 100 * 110 + 1000)).to_f
   end
   
+  def item_informations(class_id, instance_id)
+    Connection.send_request(Constant::ITEM_INFORMATION_URL % { class_id:        class_id, 
+                                                               instance_id:     instance_id, 
+                                                               your_secret_key: Rails.application.secrets.your_secret_key })
+  end
+  
   
   
   
