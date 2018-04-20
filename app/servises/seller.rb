@@ -12,9 +12,6 @@ class Seller
     # users_informator.inform_user_about_created_order
   end
   
-  def create_sell_order()
-  end
-  
   def delete_orders
     Connection.send_request(format (Constant::DELETE_ORDERS_URL, your_secret_key: Rails.application.secrets.your_secret_key))
   end
