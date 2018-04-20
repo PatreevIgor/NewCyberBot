@@ -3,9 +3,9 @@
 class Seller
   def create_buy_orders(profitable_orders)
     profitable_orders.each do |order|
-      Connection.send_request(format (Constant::CREATE_ORDER_URL, class_id:        item[class_id],
-                                                                  instance_id:     item[instance_id],
-                                                                  price:           item[price],          
+      Connection.send_request(format (Constant::CREATE_ORDER_URL, class_id:        order[class_id],
+                                                                  instance_id:     order[instance_id],
+                                                                  price:           order[price],          
                                                                   your_secret_key: Rails.application.secrets.your_secret_key))
     end
     
