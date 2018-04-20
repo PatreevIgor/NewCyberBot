@@ -2,7 +2,7 @@
 
 class Price
   
-  # ------------- for creating orders ----------------------------------------
+  # ------------------------------------------ for creating orders -------------------------------------------
   
   def price_of_sell_for_order(item) # цена продажи вещи на создаваемом ордере
     if item_never_sold?(item)
@@ -40,9 +40,9 @@ class Price
   end
   
   def get_hash_min_middle_max_prices(params)
-    url = Constant::ITEM_HISTORY_URL % { class_id:        params[:class_id].to_s,
-                                         instance_id:     params[:instance_id].to_s,
-                                         your_secret_key: Rails.application.secrets.your_secret_key}
+    url = format(Constant::ITEM_HISTORY_URL, class_id:        params[:class_id].to_s,
+                                             instance_id:     params[:instance_id].to_s,
+                                             your_secret_key: Rails.application.secrets.your_secret_key)
     response = Connection.send_request(url)
     create_hash_min_middle_max_prices(response)
   end
@@ -82,15 +82,13 @@ class Price
   end
   
   def item_informations(class_id, instance_id)
-    Connection.send_request(Constant::ITEM_INFORMATION_URL % { class_id:        class_id, 
-                                                               instance_id:     instance_id, 
-                                                               your_secret_key: Rails.application.secrets.your_secret_key })
+    Connection.send_request(format(Constant::ITEM_INFORMATION_URL, class_id:        class_id, 
+                                                                   instance_id:     instance_id, 
+                                                                   your_secret_key: Rails.application.secrets.your_secret_key))
   end
+    
   
-  
-  
-  
-  # ------------- for count coefficients ----------------------------------------
+  # ------------------------------------ for count coefficients --------------------------------------------
   
   def curr_max_price(item_hash) # максимальная цена, используется для расчета коэффициентов
     item_history(item_hash)[Constant::HASH_MAX_KEY]
