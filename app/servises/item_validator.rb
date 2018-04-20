@@ -5,8 +5,16 @@ class ItemValidator
     if coefficient_calculator.coefficient_profit(item_hash)             > 80 &&
        coefficient_calculator.coefficient_current_state(item_hash)      > 80 &&
        coefficient_calculator.coefficient_frequency_purchase(item_hash) > 80 &&
+      puts format(Constant::PROFITABLE_ITEM_TEXT,
+                  coef_prof: coefficient_calculator.coefficient_profit(item_hash),
+                  coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
+                  coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
       true
     else
+      puts format(Constant::PROFITABLE_ITEM_TEXT,
+                  coef_prof: coefficient_calculator.coefficient_profit(item_hash),
+                  coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
+                  coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
       false
     end
   end
