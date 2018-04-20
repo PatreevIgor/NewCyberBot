@@ -53,4 +53,6 @@ class Constant
   NOT_SALE_ITEMS_UPDATED_TEXT  = 'Items (not sale) in my db updated!'
   FINISHED_FILLING_TEXT        = 'Finished filling price_of_buy fields!'
   PUT_UP_ALL_BOUGHT_ITEMS_TEXT = 'Put up all bought items!'
+  PROFITABLE_ITEM_TEXT         = 'coef_prof=%<coef_prof>s / coef_cur_st=%<coef_cur_st>s / coef_fr_purch=%<coef_fr_purch>s'
+  UNPROFITABLE_ITEM_TEXT       = ''
 end
