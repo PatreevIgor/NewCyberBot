@@ -32,15 +32,15 @@ class CoefficientCalculator
   private
 
   def clean_benefit(item_hash)
-    price.price_of_sell(item_hash) - price.price_of_buy(item_hash) - price.price_of_sell(item_hash) / 100 * 10
+    price.curr_price_of_sell(item_hash) - price.curr_price_of_buy(item_hash) - price.curr_price_of_sell(item_hash) / 100 * 10
   end
 
   def dposam(item_hash)
-    @dposam ||= Price.new.diff_price_of_sell_and_min(item_hash)
+    @dposam ||= Price.new.diff_curr_price_of_sell_and_curr_min(item_hash)
   end
 
   def dmam(item_hash)
-    @dmam ||= Price.new.diff_middle_and_min(item_hash)
+    @dmam ||= Price.new.diff_curr_middle_and_curr_min(item_hash)
   end
 
   def count_days_ago(item)
