@@ -117,7 +117,7 @@ class Price
   end
 
   def diff_curr_middle_and_curr_min(item_hash) # разница между средней и минимальной ценой
-    middle_price(item_hash) - min_price(item_hash)
+    curr_middle_price(item_hash) - curr_min_price(item_hash)
   end
 
   def diff_curr_price_of_sell_and_curr_min(item_hash) # разница между ценой продажи и минимальной ценой
@@ -125,7 +125,6 @@ class Price
   end
 
   private
-  
 
   def item_history(item_hash)
     url = format(Constant::ITEM_HISTORY_URL, class_id:        item_hash[:class_id].to_s,

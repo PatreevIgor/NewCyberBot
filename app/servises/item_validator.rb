@@ -2,25 +2,31 @@
 
 class ItemValidator
   def item_profitable?(item_hash)
-    if coefficient_calculator.coefficient_profit(item_hash)             > 80 &&
+    puts item_hash
+    puts 'coef-profit =' + coefficient_calculator.coefficient_profit(item_hash).to_s
+    puts 'coef-cur_st =' + coefficient_calculator.coefficient_current_state(item_hash).to_s
+    puts 'coef-fr_pur =' + coefficient_calculator.coefficient_frequency_purchase(item_hash).to_s
+
+
+    if coefficient_calculator.coefficient_profit(item_hash)             > 80 && # условие: чистая выгода больше 20 руб.
        coefficient_calculator.coefficient_current_state(item_hash)      > 80 &&
        coefficient_calculator.coefficient_frequency_purchase(item_hash) > 80 &&
-      puts format(Constant::PROFITABLE_ITEM_TEXT,
-                  coef_prof: coefficient_calculator.coefficient_profit(item_hash),
-                  coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
-                  coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
+      # puts format(Constant::PROFITABLE_ITEM_TEXT,
+      #             coef_prof: coefficient_calculator.coefficient_profit(item_hash),
+      #             coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
+      #             coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
       true
     else
-      puts format(Constant::PROFITABLE_ITEM_TEXT,
-                  coef_prof: coefficient_calculator.coefficient_profit(item_hash),
-                  coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
-                  coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
+      # puts format(Constant::PROFITABLE_ITEM_TEXT,
+      #             coef_prof: coefficient_calculator.coefficient_profit(item_hash),
+      #             coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
+      #             coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
       false
     end
   end
 
   def price_interval_is_valid?(item_hash)
-    item_hash['price'] >= 30 and item_hash['price'] <= 150 ? true : false
+    item_hash['price'] >= 10 and item_hash['price'] <= 150 ? true : false # цены вынети в конфигурационный файл
   end
   
   private

@@ -23,7 +23,7 @@ class Constant
                          '%<class_id>s/%<instance_id>s/%<price>s/?key=%<your_secret_key>s'
   SET_PRICE_URL        = 'https://market.dota2.net/api/SetPrice/%<ui_id>s/%<price>s/?key=%<your_secret_key>s'
   UPDATE_INVENTARY_URL = 'https://market.dota2.net/api/UpdateInventory/?key=%<your_secret_key>s'
-  
+
   # ----------- HASH KEYS ------------------
   HASH_MIN_KEY                 = 'min'
   HASH_MAX_KEY                 = 'max'
@@ -34,6 +34,7 @@ class Constant
   ITEM_HASH_PRICE_KEY          = 'price'
   ITEM_HASH_HASH_NAME_KEY      = 'hash_name'
   ITEM_INFO_HASH_MIN_PRICE_KEY = 'min_price'
+  ITEM_HASH_BEST_OFFER_KEY     = 'best_offer'
     
   # ------------ ORDER STATUSES ----------------------
   NOT_ACTUALIZED_ORDER_STATUS = 'not_actualized_order'
