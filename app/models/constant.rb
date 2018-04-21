@@ -35,6 +35,8 @@ class Constant
   ITEM_HASH_HASH_NAME_KEY      = 'hash_name'
   ITEM_INFO_HASH_MIN_PRICE_KEY = 'min_price'
   ITEM_HASH_BEST_OFFER_KEY     = 'best_offer'
+  TIME_OF_SAIL_KEY             = 'l_time'
+  HISTORY_KEY                  = 'history'
     
   # ------------ ORDER STATUSES ----------------------
   NOT_ACTUALIZED_ORDER_STATUS = 'not_actualized_order'

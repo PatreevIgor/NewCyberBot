@@ -33,7 +33,7 @@ class CoefficientCalculator
     url = format(Constant::ITEM_HISTORY_URL, class_id:        item_hash[Constant::ITEM_HASH_CLASS_ID_KEY].to_s,
                                              instance_id:     item_hash[Constant::ITEM_HASH_INSTANCE_ID_KEY].to_s,
                                              your_secret_key: Rails.application.secrets.your_secret_key)
-    Connection.send_request(url)['history']
+    Connection.send_request(url)[Constant::HISTORY_KEY]
   end
 
   def clean_benefit(item_hash)
@@ -49,7 +49,7 @@ class CoefficientCalculator
   end
 
   def count_days_ago(item)
-    (Time.now.to_i - item['l_time'].to_i) / 60 / 60 / 24
+    (Time.now.to_i - item[Constant::TIME_OF_SAIL_KEY].to_i) / 60 / 60 / 24
   end
 
   def count_coefficient_frequency_purchase(hash_of_sales)

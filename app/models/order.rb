@@ -1,19 +1,36 @@
 class Order < ApplicationRecord
+  def create_buy_orders(profitable_orders)
+    profitable_orders.each do |order|
+      Connection.send_request(format(Constant::CREATE_ORDER_URL, class_id:        order[Constant::ITEM_HASH_CLASS_ID_KEY],
+                                                                 instance_id:     order[Constant::ITEM_HASH_INSTANCE_ID_KEY],
+                                                                 price:           price.price_of_sell_for_order(order),
+                                                                 your_secret_key: Rails.application.secrets.your_secret_key))
+    end
+    
+    # users_informator.inform_user_about_created_order
+  end
+  
+  # def delete_orders
+  #   Connection.send_request(format (Constant::DELETE_ORDERS_URL, your_secret_key: Rails.application.secrets.your_secret_key))
+  # end
+
   def create_order(item_hash)
-    Order.create(class_id:    item_hash[:class_id],
-                 instance_id: item_hash[:instance_id],
-                 hash_name:   item_hash[:hash_name],
+    Order.create(class_id:    item_hash[Constant::ITEM_HASH_CLASS_ID_KEY],
+                 instance_id: item_hash[Constant::ITEM_HASH_INSTANCE_ID_KEY],
+                 hash_name:   item_hash[Constant::ITEM_HASH_HASH_NAME_KEY],
                  link:        link_generator.generate_link(item_hash),
-                 status:      Constant::PROFITABLE_ORDER_STATUS)
+                 status:      Constant::NOT_ACTUALIZED_ORDER_STATUS)
   end
 
   def actualize_orders
-    non_actualized_orders = Order.where(status: [NOT_ACTUALIZED_ORDER_STATUS, UNPROFITABLE_ORDER_STATUS])
+    non_actualized_orders = Order.where(status: [Constant::NOT_ACTUALIZED_ORDER_STATUS, Constant::UNPROFITABLE_ORDER_STATUS])
     non_actualized_orders.each do |order|
       if item_validator.item_profitable?(order_info_hash(order))
-        order.status = PROFITABLE_ORDER_STATUS
+        order.status = Constant::PROFITABLE_ORDER_STATUS
+        order.save
       else
-        order.status = UNPROFITABLE_ORDER_STATUS
+        order.status = Constant::UNPROFITABLE_ORDER_STATUS
+        order.save
       end
     end
   end
@@ -28,11 +45,15 @@ class Order < ApplicationRecord
     @item_validator ||= ItemValidator.new
   end
 
+  def price
+    @price ||= Price.new
+  end
+
   def link_generator
     @link_generator ||= LinkGenerator.new
   end
 
   def order_info_hash(order)
-    { "classid" => order.class_id, "instanceid" => order.instance_id }
+    { Constant::ITEM_HASH_CLASS_ID_KEY => order.class_id, Constant::ITEM_HASH_INSTANCE_ID_KEY => order.instance_id }
   end
 end

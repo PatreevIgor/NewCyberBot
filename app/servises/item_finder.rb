@@ -3,7 +3,10 @@
 class ItemFinder
   def find_actuall_items
     last_50_sales.each do |item_hash|
-      seller.create_order(item_hash) if all_conditions_fulfilled?(item_hash)
+      if all_conditions_fulfilled?(item_hash)
+        order.create_order(item_hash)
+        puts "Order created #{item_hash}"
+      end
     end
   end
 
@@ -21,15 +24,11 @@ class ItemFinder
     end
   end
 
-  def item_validator
-    @item_validator ||= ItemValidator.new
-  end
-
   def order
     @order ||= Order.new
   end
 
-  def seller
-    @seller ||= Seller.new
+  def item_validator
+    @item_validator ||= ItemValidator.new
   end
 end

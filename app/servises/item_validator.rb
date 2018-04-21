@@ -2,25 +2,16 @@
 
 class ItemValidator
   def item_profitable?(item_hash)
-    puts item_hash
-    puts 'coef-profit =' + coefficient_calculator.coefficient_profit(item_hash).to_s
-    puts 'coef-cur_st =' + coefficient_calculator.coefficient_current_state(item_hash).to_s
-    puts 'coef-fr_pur =' + coefficient_calculator.coefficient_frequency_purchase(item_hash).to_s
+    #puts 'coef-fr_pur =' + coefficient_calculator.coefficient_frequency_purchase(item_hash).to_s
 
 
-    if coefficient_calculator.coefficient_profit(item_hash)             > 80 && # условие: чистая выгода больше 20 руб.
-       coefficient_calculator.coefficient_current_state(item_hash)      > 80 &&
-       coefficient_calculator.coefficient_frequency_purchase(item_hash) > 80 &&
-      # puts format(Constant::PROFITABLE_ITEM_TEXT,
-      #             coef_prof: coefficient_calculator.coefficient_profit(item_hash),
-      #             coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
-      #             coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
+    if coefficient_calculator.coefficient_profit(item_hash)             > 80 &&
+       coefficient_calculator.coefficient_current_state(item_hash)      > 80 #&&
+       #coefficient_calculator.coefficient_frequency_purchase(item_hash) > 10
+      puts 'coef-profit =' + coefficient_calculator.coefficient_profit(item_hash).to_s
+      puts 'coef-cur_st =' + coefficient_calculator.coefficient_current_state(item_hash).to_s
       true
     else
-      # puts format(Constant::PROFITABLE_ITEM_TEXT,
-      #             coef_prof: coefficient_calculator.coefficient_profit(item_hash),
-      #             coef_cur_st: coefficient_calculator.coefficient_current_state(item_hash),
-      #             coef_fr_purch: coefficient_calculator.coefficient_frequency_purchase(item_hash))
       false
     end
   end

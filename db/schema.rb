@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417091340) do
+ActiveRecord::Schema.define(version: 20180422080024) do
 
   create_table "items", force: :cascade do |t|
     t.integer "class_id"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20180417091340) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "class_id"
-    t.integer "instance_id"
+    t.integer "class_id", limit: 16
+    t.integer "instance_id", limit: 16
     t.string "hash_name"
     t.float "price"
     t.string "link"
