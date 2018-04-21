@@ -2,7 +2,7 @@
 
 class Price
   
-  # ------------- for creating orders ----------------------------------------
+  # ------------------------------------------ for creating orders -------------------------------------------
   
   def price_of_sell_for_order(item) # цена продажи вещи на создаваемом ордере
     if item_never_sold?(item)
@@ -40,9 +40,9 @@ class Price
   end
   
   def get_hash_min_middle_max_prices(params)
-    url = Constant::ITEM_HISTORY_URL % { class_id:        params[:class_id].to_s,
-                                         instance_id:     params[:instance_id].to_s,
-                                         your_secret_key: Rails.application.secrets.your_secret_key}
+    url = format(Constant::ITEM_HISTORY_URL, class_id:        params[:class_id].to_s,
+                                             instance_id:     params[:instance_id].to_s,
+                                             your_secret_key: Rails.application.secrets.your_secret_key)
     response = Connection.send_request(url)
     create_hash_min_middle_max_prices(response)
   end
@@ -81,43 +81,47 @@ class Price
     sprintf("%.0f", (item.price_of_buy / 100 * 110 + 1000)).to_f
   end
   
+  def item_informations(class_id, instance_id)
+    Connection.send_request(format(Constant::ITEM_INFORMATION_URL, class_id:        class_id, 
+                                                                   instance_id:     instance_id, 
+                                                                   your_secret_key: Rails.application.secrets.your_secret_key))
+  end
+    
   
+  # ------------------------------------ for count coefficients --------------------------------------------
   
-  
-  # ------------- for count coefficients ----------------------------------------
-  
-  def max_price(item_hash) # максимальная цена, используется для расчета коэффициентов
+  def curr_max_price(item_hash) # максимальная цена, используется для расчета коэффициентов
     item_history(item_hash)[Constant::HASH_MAX_KEY]
   end
 
-  def middle_price(item_hash) # средняя цена, используется для расчета коэффициентов
+  def curr_middle_price(item_hash) # средняя цена, используется для расчета коэффициентов
     item_history(item_hash)[Constant::HASH_AVERAGE_KEY]
   end
 
-  def min_price(item_hash) # минимальная цена, используется для расчета коэффициентов
+  def curr_min_price(item_hash) # минимальная цена, используется для расчета коэффициентов
     item_history(item_hash)[Constant::HASH_MIN_KEY]
   end
 
-  def price_of_buy(item_hash) # текущая цена покупки
+  def curr_price_of_buy(item_hash) # текущая цена покупки
     url = format(Constant::BEST_BUY_OFFER_URL, class_id:        item_hash['classid'],
                                                instance_id:     item_hash['instanceid'],
                                                your_secret_key: Rails.application.secrets.your_secret_key)
     price(url)
   end
 
-  def price_of_sell(item_hash) # текущая цена продажи
+  def curr_price_of_sell(item_hash) # текущая цена продажи
     url = format(Constant::BEST_SELL_OFFER_URL, class_id:        item_hash['classid'],
                                                 instance_id:     item_hash['instanceid'],
                                                 your_secret_key: Rails.application.secrets.your_secret_key)
     price(url)
   end
 
-  def diff_middle_and_min(item_hash) # разница между средней и минимальной ценой
+  def diff_curr_middle_and_curr_min(item_hash) # разница между средней и минимальной ценой
     middle_price(item_hash) - min_price(item_hash)
   end
 
-  def diff_price_of_sell_and_min(item_hash) # разница между ценой продажи и минимальной ценой
-    price_of_sell(item_hash) - min_price(item_hash)
+  def diff_curr_price_of_sell_and_curr_min(item_hash) # разница между ценой продажи и минимальной ценой
+    curr_price_of_sell(item_hash) - curr_min_price(item_hash)
   end
 
   private
