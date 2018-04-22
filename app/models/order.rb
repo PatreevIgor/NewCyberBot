@@ -6,7 +6,6 @@ class Order < ApplicationRecord
                                                                  price:           price.price_of_sell_for_order(order),
                                                                  your_secret_key: Rails.application.secrets.your_secret_key))
     end
-    
     # users_informator.inform_user_about_created_order
   end
   

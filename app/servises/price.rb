@@ -5,29 +5,34 @@ class Price
   # ------------------------------------------ for creating orders -------------------------------------------
   
   def price_of_sell_for_order(item) # цена продажи вещи на создаваемом ордере
-    binding.pry
-    if item_never_sold?(item)
-      price_of_never_sold_order(item)
-    elsif order_other_user_not_exist?(item)
-      max_price_of_sales_from_history(params)
+    if item_never_sold?(item_info_hash(item))
+      price_of_never_sold_order(item_info_hash(item))
+    elsif order_other_user_not_exist?(item_info_hash(item))
+      max_price_of_sales_from_history(item_info_hash(item))
     else
-      appropriate_price(item)
+      appropriate_price(item_info_hash(item))
     end
   end
   
-  def item_never_sold?(item)
-    if min_price_of_sales_from_history({ class_id: item[Constant::ITEM_HASH_CLASS_ID_KEY], instance_id: item[Constant::ITEM_HASH_INSTANCE_ID_KEY] }) == 1 &&
-       max_price_of_sales_from_history({ class_id: item[Constant::ITEM_HASH_CLASS_ID_KEY], instance_id: item[Constant::ITEM_HASH_INSTANCE_ID_KEY] }) == 2
+  def item_never_sold?(item_hash)
+    if min_price_of_sales_from_history(item_hash) == 1 &&
+       max_price_of_sales_from_history(item_hash) == 2
       true
+    else
+      false
     end
   end
   
-  def price_of_never_sold_order(item)
-    item.price_of_buy / 100 * 110 + 3000
+  def price_of_never_sold_order(item_hash)
+    curr_price_of_buy(item_hash) / 100 * 110 + 3000
   end
     
-  def order_other_user_not_exist?(item)
-    true if (item_informations(item[Constant::ITEM_HASH_CLASS_ID_KEY], item[Constant::ITEM_HASH_INSTANCE_ID_KEY])[Constant::ITEM_INFO_HASH_MIN_PRICE_KEY] == -1)
+  def order_other_user_not_exist?(item_hash)
+    if (item_informations(item_hash[Constant::ITEM_HASH_CLASS_ID_KEY], item_hash[Constant::ITEM_HASH_INSTANCE_ID_KEY])[Constant::ITEM_INFO_HASH_MIN_PRICE_KEY] == -1)
+      true
+    else
+      false
+    end
   end
   
   def min_price_of_sales_from_history(params)
@@ -68,11 +73,11 @@ class Price
     min_middle_max_prices
   end
   
-  def appropriate_price(item)
-    if min_price_of_orders_to_buy(item[Constant::ITEM_HASH_CLASS_ID_KEY], item[Constant::ITEM_HASH_INSTANCE_ID_KEY]) < min_favorable_price(item)
-      min_favorable_price(item)
+  def appropriate_price(item_hash)
+    if min_price_of_orders_to_buy(item_hash[Constant::ITEM_HASH_CLASS_ID_KEY], item_hash[Constant::ITEM_HASH_INSTANCE_ID_KEY]) < min_favorable_price(item_hash)
+      min_favorable_price(item_hash)
     else
-      min_price_of_orders_to_buy(item[Constant::ITEM_HASH_CLASS_ID_KEY], item[Constant::ITEM_HASH_INSTANCE_ID_KEY])
+      min_price_of_orders_to_buy(item_hash[Constant::ITEM_HASH_CLASS_ID_KEY], item_hash[Constant::ITEM_HASH_INSTANCE_ID_KEY])
     end
   end
   
@@ -80,8 +85,8 @@ class Price
     item_informations(class_id, instance_id)[Constant::ITEM_INFO_HASH_MIN_PRICE_KEY].to_f - 0001
   end
   
-  def min_favorable_price(item)
-    sprintf("%.0f", (item.price_of_buy / 100 * 110 + 1000)).to_f
+  def min_favorable_price(item_hash)
+    sprintf("%.0f", (curr_price_of_buy(item_hash) / 100 * 110 + 1000)).to_f
   end
   
   def item_informations(class_id, instance_id)
@@ -128,6 +133,10 @@ class Price
   end
 
   private
+
+  def item_info_hash(item)
+    { Constant::ITEM_HASH_CLASS_ID_KEY => item.class_id, Constant::ITEM_HASH_INSTANCE_ID_KEY => item.instance_id }
+  end
 
   def item_history(item_hash)
     url = format(Constant::ITEM_HISTORY_URL, class_id:        item_hash[:class_id].to_s,
