@@ -49,6 +49,7 @@ class Constant
   IN_INVENTARY_ITEM_STATUS = 'in_inventory'
 
   # --------------------------- TEXTS -----------------------------------
+  TEXT_MESSAGE_CREATE_BUY_ORDER    = 'Order create on the website!'
   COUNT_FOUND_ITEMS_TEXT       = 'Found %<count_item>s new items!'
   ITEM_CREATED_TEXT            = 'Item created!'
   REMOVED_ALL_TRADES_TEXT      = 'Removed all trades!'

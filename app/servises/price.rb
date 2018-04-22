@@ -3,10 +3,21 @@
 class Price
   
   # ------------------------------------------ for creating orders -------------------------------------------
+  def price_of_buy_for_order(order)
+    если есть другие ордера:
+      цена_максимального_ордера_на_покупку
+      предельная выгодная цена ордера на покупку
+    если нету ордеров:
+      цена с наваром 30 рублей
+    енд
+
+
+  end
+  # ------------------------------------------ for creating items -------------------------------------------
   
-  def price_of_sell_for_order(item) # цена продажи вещи на создаваемом ордере
+  def price_of_sell_for_item(item) # цена при выставлении купленной вещи
     if item_never_sold?(item_info_hash(item))
-      price_of_never_sold_order(item_info_hash(item))
+      price_of_never_sold_item(item_info_hash(item))
     elsif order_other_user_not_exist?(item_info_hash(item))
       max_price_of_sales_from_history(item_info_hash(item))
     else
@@ -23,7 +34,7 @@ class Price
     end
   end
   
-  def price_of_never_sold_order(item_hash)
+  def price_of_never_sold_item(item_hash)
     curr_price_of_buy(item_hash) / 100 * 110 + 3000
   end
     

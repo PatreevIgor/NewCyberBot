@@ -2,9 +2,10 @@
 
 class CyberBot
   def start_work
-    loop do
-      time_calculator.now_is_night? ? task_performer.perform_night_tasks : task_performer.perform_daily_tasks
-    end
+    task_performer.perform_daily_tasks
+    # loop do
+    #   time_calculator.now_is_night? ? task_performer.perform_night_tasks : task_performer.perform_daily_tasks
+    # end
   end
 
   private
