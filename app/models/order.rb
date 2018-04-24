@@ -1,7 +1,6 @@
 class Order < ApplicationRecord
   def create_buy_orders(profitable_orders)
     profitable_orders.each do |order|
-      binding.pry
       Connection.send_request(format(Constant::CREATE_ORDER_URL, class_id:        order_info_hash(order)[Constant::ITEM_HASH_CLASS_ID_KEY],
                                                                  instance_id:     order_info_hash(order)[Constant::ITEM_HASH_INSTANCE_ID_KEY],
                                                                  price:           price.price_of_buy_for_order(order),
@@ -15,7 +14,7 @@ class Order < ApplicationRecord
   #   Connection.send_request(format (Constant::DELETE_ORDERS_URL, your_secret_key: Rails.application.secrets.your_secret_key))
   # end
 
-  def create_order(item_hash)
+  def create_order_in_db(item_hash)
     Order.create(class_id:    item_hash[Constant::ITEM_HASH_CLASS_ID_KEY],
                  instance_id: item_hash[Constant::ITEM_HASH_INSTANCE_ID_KEY],
                  hash_name:   item_hash[Constant::ITEM_HASH_HASH_NAME_KEY],
