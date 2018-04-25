@@ -16,6 +16,7 @@ class Price
   end
   
   def other_buy_orders_exist?
+    # эта инфа так же из пост запроса - масс инфо.
   end
   
   def limit_of_min_price_of_buy_orders
@@ -28,7 +29,7 @@ class Price
                                           history: 0,
                                           info: 0,
                                           your_secret_key: Rails.application.secrets.your_secret_key)
-    response = Connection.send_request(url)
+    response = Connection.send_post_request(url)
   end
   
   
