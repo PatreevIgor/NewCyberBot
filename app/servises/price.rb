@@ -4,14 +4,14 @@ class Price
   
   # ------------------------------------------ for creating orders -------------------------------------------
   def price_of_buy_for_order(order)
-    if other_buy_orders_exist?                                      # если есть другие ордера?
-      if max_price_of_buy_orders > limit_of_min_price_of_buy_orders
-        return limit_of_min_price_of_buy_orders                     # предельная минимальная цена ордера
+    if other_buy_orders_exist?(order)
+      if max_price_of_buy_orders(order)  > limit_of_min_price_of_buy_orders(order) 
+        return limit_of_min_price_of_buy_orders(order)                             # предельная минимальная цена ордера
       else
-        return (max_price_of_buy_orders + 1)                        # цена максимально большого ордера на покупку + 1 рубль
+        return (max_price_of_buy_orders(order) + 1)                                # цена максимально большого ордера на покупку + 1 рубль
       end
     else
-      5                                                             # минимальная цена покупки вещи = 0.5 рубля
+      50                                                                           # минимальная цена покупки вещи = 0.5 рубля
     end
   end
   
@@ -19,17 +19,17 @@ class Price
     # эта инфа так же из пост запроса - масс инфо.
   end
   
-  def limit_of_min_price_of_buy_orders
+  def limit_of_min_price_of_buy_orders(order)
   end
   
-  def max_price_of_buy_orders
+  def max_price_of_buy_orders(order)
     # этот запрос необходимо отправить пост запросом и передать в него Параметры запроса (POST данные): list — classid_instanceid,classid_instanceid,classid_instanceid,classid_instanceid,...
     url = format(Constant::MASS_INFO_URL, sell: 0,
                                           buy: 2,
                                           history: 0,
                                           info: 0,
                                           your_secret_key: Rails.application.secrets.your_secret_key)
-    response = Connection.send_post_request(url)
+    response = Connection.send_post_request(url, order)
   end
   
   
