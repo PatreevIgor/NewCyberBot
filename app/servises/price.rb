@@ -4,30 +4,27 @@ class Price
   
   # ------------------------------------------ for creating orders -------------------------------------------
   def price_of_buy_for_order(order)
-    if other_buy_orders_exist?
+    if other_buy_orders_exist?                                      # если есть другие ордера?
       if max_price_of_buy_orders > limit_of_min_price_of_buy_orders
-        limit_of_min_price_of_buy_orders
+        return limit_of_min_price_of_buy_orders                     # предельная минимальная цена ордера
       else
-        max_price_of_buy_orders + 1
+        return (max_price_of_buy_orders + 1)                        # цена максимально большого ордера на покупку + 1 рубль
       end
-        
-        
-        
-        # цена максимально большого ордера на покупку + 1 рубль
-         # предельная минимальная цена ордера
     else
-      5                                # минимальная цена покупки вещи = 0.5 рубля
+      5                                                             # минимальная цена покупки вещи = 0.5 рубля
     end
-    
-    если есть другие ордера:
-      цена_максимального_ордера_на_покупку + 1
-      предельная выгодная цена ордера на покупку
-    если нету ордеров:
-      цена с наваром 30 рублей
-    енд
-
-
   end
+  
+  def other_buy_orders_exist?
+  end
+  
+  def limit_of_min_price_of_buy_orders
+  end
+  
+  def max_price_of_buy_orders
+  end
+  
+  
   # ------------------------------------------ for creating items -------------------------------------------
   
   def price_of_sell_for_item(item) # цена при выставлении купленной вещи
