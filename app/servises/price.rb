@@ -15,11 +15,14 @@ class Price
     end
   end
   
-  def other_buy_orders_exist?
+  def other_buy_orders_exist?(order)
     # эта инфа так же из пост запроса - масс инфо.
   end
   
   def limit_of_min_price_of_buy_orders(order)
+    # эта сумма будет браться из БД, поле price изменить на price_of_buy
+    Item.where(class_id: Constant::ITEM_HASH_CLASS_ID_KEY).where('(class_id= ? AND instance_id= ?)', Constant::ITEM_HASH_CLASS_ID_KEY, ITEM_HASH_INSTANCE_ID_KEY)
+   
   end
   
   def max_price_of_buy_orders(order)
