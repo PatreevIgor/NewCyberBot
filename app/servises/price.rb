@@ -4,13 +4,38 @@ class Price
   
   # ------------------------------------------ for creating orders -------------------------------------------
   def price_of_buy_for_order(order)
-    # если есть другие ордера:
-    #   цена_максимального_ордера_на_покупку + 1 копейка, но не меньше 
-    #   предельной выгодной цены ордера на покупку
-    # если нету ордеров:
-    #   0.5
-    # енд
+    if other_buy_orders_exist?(order)
+      if max_price_of_buy_orders(order)  > limit_of_min_price_of_buy_orders(order) 
+        return limit_of_min_price_of_buy_orders(order)                             # предельная минимальная цена ордера
+      else
+        return (max_price_of_buy_orders(order) + 1)                                # цена максимально большого ордера на покупку + 1 рубль
+      end
+    else
+      50                                                                           # минимальная цена покупки вещи = 0.5 рубля
+    end
   end
+  
+  def other_buy_orders_exist?(order)
+    # эта инфа так же из пост запроса - масс инфо.
+  end
+  
+  def limit_of_min_price_of_buy_orders(order)
+    # эта сумма будет браться из БД, поле price изменить на price_of_buy
+    Item.where(class_id: Constant::ITEM_HASH_CLASS_ID_KEY).where('(class_id= ? AND instance_id= ?)', Constant::ITEM_HASH_CLASS_ID_KEY, ITEM_HASH_INSTANCE_ID_KEY)
+   
+  end
+  
+  def max_price_of_buy_orders(order)
+    # этот запрос необходимо отправить пост запросом и передать в него Параметры запроса (POST данные): list — classid_instanceid,classid_instanceid,classid_instanceid,classid_instanceid,...
+    url = format(Constant::MASS_INFO_URL, sell: 0,
+                                          buy: 2,
+                                          history: 0,
+                                          info: 0,
+                                          your_secret_key: Rails.application.secrets.your_secret_key)
+    response = Connection.send_post_request(url, order)
+  end
+  
+  
   # ------------------------------------------ for creating items -------------------------------------------
   
   def price_of_sell_for_item(item) # цена при выставлении купленной вещи
