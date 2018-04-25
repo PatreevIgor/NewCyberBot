@@ -22,6 +22,13 @@ class Price
   end
   
   def max_price_of_buy_orders
+    # этот запрос необходимо отправить пост запросом и передать в него Параметры запроса (POST данные): list — classid_instanceid,classid_instanceid,classid_instanceid,classid_instanceid,...
+    url = format(Constant::MASS_INFO_URL, sell: 0,
+                                          buy: 2,
+                                          history: 0,
+                                          info: 0,
+                                          your_secret_key: Rails.application.secrets.your_secret_key)
+    response = Connection.send_request(url)
   end
   
   
