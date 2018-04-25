@@ -3,10 +3,7 @@
 class ItemFinder
   def find_actuall_items
     last_50_sales.each do |item_hash|
-      if all_conditions_fulfilled?(item_hash)
-        order.create_order(item_hash)
-        puts "Order created #{item_hash}"
-      end
+      order.create_order_in_db(item_hash) if all_conditions_fulfilled?(item_hash)
     end
   end
 

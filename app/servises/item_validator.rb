@@ -2,14 +2,16 @@
 
 class ItemValidator
   def item_profitable?(item_hash)
-    #puts 'coef-fr_pur =' + coefficient_calculator.coefficient_frequency_purchase(item_hash).to_s
+    coef_profit = coefficient_calculator.coefficient_profit(item_hash)
+    coef_cur_st = coefficient_calculator.coefficient_current_state(item_hash)
+    coef_fr_pur = coefficient_calculator.coefficient_frequency_purchase(item_hash)
 
 
-    if coefficient_calculator.coefficient_profit(item_hash)             > 80 &&
-       coefficient_calculator.coefficient_current_state(item_hash)      > 80 #&&
-       #coefficient_calculator.coefficient_frequency_purchase(item_hash) > 10
-      puts 'coef-profit =' + coefficient_calculator.coefficient_profit(item_hash).to_s
-      puts 'coef-cur_st =' + coefficient_calculator.coefficient_current_state(item_hash).to_s
+    if coef_profit > 80 && coef_cur_st > 80 && coef_fr_pur > 1
+      puts 'coef-profit =' + coef_profit.to_s
+      puts 'coef-cur_st =' + coef_cur_st.to_s
+      puts 'coef-fr_pur =' + coef_fr_pur.to_s
+
       true
     else
       false
