@@ -24,7 +24,7 @@ class Constant
   SET_PRICE_URL        = 'https://market.dota2.net/api/SetPrice/%<ui_id>s/%<price>s/?key=%<your_secret_key>s'
   UPDATE_INVENTARY_URL = 'https://market.dota2.net/api/UpdateInventory/?key=%<your_secret_key>s'
   
-  MASS_INFO_URL        = 'https://market.dota2.net/api/MassInfo/%<sell>s/%<buy>s/%<history>s/%<info>s?key=%<your_secret_key>s
+  MASS_INFO_URL        = 'https://market.dota2.net/api/MassInfo/%<sell>s/%<buy>s/%<history>s/%<info>s?key=%<your_secret_key>s'
                        # %<sell>s — Может принимать значения 0,1,2
                        #   0 - Не получать предложения о продаже
                        #   1 - Получать топ 50 дешевых предложений + свой

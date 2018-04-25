@@ -9,9 +9,9 @@ class Connection
   end
   
   def self.send_post_request(url, order)
-    uri           = URI.parse(url)
-    list          = "#{order.classid}" + "_" + "#{order.instanceid}" # посмотреть в каком виде приходит ORDER, изменить синтаксис.
+    params   = { list: "#{order.class_id}_#{order.instance_id}" }
+    response = Net::HTTP.post_form(URI.parse(url), params).body
 
-    response_post = Net::HTTP.post_form(uri, list).body # возможно ответ придет в JSONe и его надо распарсить
+    JSON.parse(response)
   end
 end

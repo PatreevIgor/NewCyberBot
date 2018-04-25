@@ -4,24 +4,27 @@ class Price
   
   # ------------------------------------------ for creating orders -------------------------------------------
   def price_of_buy_for_order(order)
-    if other_buy_orders_exist?(order)
-      if max_price_of_buy_orders(order)  > limit_of_min_price_of_buy_orders(order) 
-        return limit_of_min_price_of_buy_orders(order)                             # предельная минимальная цена ордера
-      else
-        return (max_price_of_buy_orders(order) + 1)                                # цена максимально большого ордера на покупку + 1 рубль
-      end
-    else
-      50                                                                           # минимальная цена покупки вещи = 0.5 рубля
-    end
+    other_buy_orders_exist?(order) ? (max_price_of_buy_orders(order) + 10) : 50
   end
   
   def other_buy_orders_exist?(order)
-    # эта инфа так же из пост запроса - масс инфо.
+    url = format(Constant::MASS_INFO_URL, sell: 0,
+                                          buy: 2,
+                                          history: 0,
+                                          info: 0,
+                                          your_secret_key: Rails.application.secrets.your_secret_key)
+    response = Connection.send_post_request(url, order)
+
+    if response["results"].first["buy_offers"] == false
+      return false
+    else
+      return  true
+    end
   end
   
   def limit_of_min_price_of_buy_orders(order)
     # эта сумма будет браться из БД, поле price изменить на price_of_buy
-    Item.where(class_id: Constant::ITEM_HASH_CLASS_ID_KEY).where('(class_id= ? AND instance_id= ?)', Constant::ITEM_HASH_CLASS_ID_KEY, ITEM_HASH_INSTANCE_ID_KEY)
+    order.price + 1000
    
   end
   
@@ -33,6 +36,7 @@ class Price
                                           info: 0,
                                           your_secret_key: Rails.application.secrets.your_secret_key)
     response = Connection.send_post_request(url, order)
+    response["results"].first["buy_offers"]["best_offer"]
   end
   
   
