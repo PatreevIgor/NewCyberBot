@@ -4,30 +4,17 @@ class Price
   
   # ------------------------------------------ for creating orders -------------------------------------------
   def price_of_buy_for_order(order)
-    other_buy_orders_exist?(order) ? (max_price_of_buy_orders(order) + 10) : 50
+    other_buy_orders_exist?(order) ? (max_price_of_buy_orders(order) + 1) : 50
   end
   
   def other_buy_orders_exist?(order)
-    url = format(Constant::MASS_INFO_URL, sell: 0,
-                                          buy: 2,
-                                          history: 0,
-                                          info: 0,
+    url = format(Constant::MASS_INFO_URL, sell: 0, buy: 2, history: 0, info: 0,
                                           your_secret_key: Rails.application.secrets.your_secret_key)
     response = Connection.send_post_request(url, order)
 
-    if response["results"].first["buy_offers"] == false
-      return false
-    else
-      return  true
-    end
+    response["results"].first["buy_offers"].nil? ? false : true
   end
-  
-  def limit_of_min_price_of_buy_orders(order)
-    # эта сумма будет браться из БД, поле price изменить на price_of_buy
-    order.price + 1000
-   
-  end
-  
+
   def max_price_of_buy_orders(order)
     # этот запрос необходимо отправить пост запросом и передать в него Параметры запроса (POST данные): list — classid_instanceid,classid_instanceid,classid_instanceid,classid_instanceid,...
     url = format(Constant::MASS_INFO_URL, sell: 0,

@@ -22,9 +22,21 @@ class Order < ApplicationRecord
                  status:      Constant::NOT_ACTUALIZED_ORDER_STATUS)
   end
 
-  def actualize_orders
-    non_actualized_orders = Order.where(status: [Constant::NOT_ACTUALIZED_ORDER_STATUS, Constant::UNPROFITABLE_ORDER_STATUS])
+  def actualize_new_orders
+    non_actualized_orders = Order.where(status: Constant::NOT_ACTUALIZED_ORDER_STATUS)
     non_actualized_orders.each do |order|
+      if item_validator.item_profitable?(order_info_hash(order))
+        order.status = Constant::PROFITABLE_ORDER_STATUS
+        order.save
+      else
+        order.status = Constant::UNPROFITABLE_ORDER_STATUS
+        order.save
+      end
+    end
+  end
+
+  def actualize_old_orders
+    Order.where(status: [Constant::UNPROFITABLE_ORDER_STATUS, Constant::PROFITABLE_ORDER_STATUS]).each do |order|
       if item_validator.item_profitable?(order_info_hash(order))
         order.status = Constant::PROFITABLE_ORDER_STATUS
         order.save

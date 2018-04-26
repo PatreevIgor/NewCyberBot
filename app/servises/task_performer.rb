@@ -2,9 +2,10 @@
 
 class TaskPerformer
   def perform_daily_tasks
-    # actualize_orders               # из статуса NOT_ACTUALIZED_ORDER_STATUS изменить на PROFITABLE_ORDER_STATUS или UNPROFITABLE_ORDER_STATUS
+    actualize_new_orders    # in_db       # из статуса NOT_ACTUALIZED_ORDER_STATUS изменить на PROFITABLE_ORDER_STATUS или UNPROFITABLE_ORDER_STATUS
+    actualize_old_orders    # in db       # из статуса NOT_ACTUALIZED_ORDER_STATUS изменить на PROFITABLE_ORDER_STATUS или UNPROFITABLE_ORDER_STATUS
     create_buy_orders              # создать ордера на покупку, только для вещей со статусом PROFITABLE_ORDER_STATUS, изменить на статус CREATED_ORDER_STATUS
-    # item_finder.find_actuall_items # искать новые вещи, найденные вещи сохранить в БД со статусом NOT_ACTUALIZED_ORDER_STATUS
+    item_finder.find_actuall_items # искать новые вещи, найденные вещи сохранить в БД со статусом NOT_ACTUALIZED_ORDER_STATUS
                                    # users_informator.inform_user_about_sell_items
   end
 
@@ -15,8 +16,12 @@ class TaskPerformer
 
   private
 
-  def actualize_orders
-    order.actualize_orders if Order.where(status: Constant::NOT_ACTUALIZED_ORDER_STATUS).exists?
+  def actualize_new_orders
+    order.actualize_new_orders if Order.where(status: Constant::NOT_ACTUALIZED_ORDER_STATUS).exists?
+  end
+
+  def actualize_old_orders
+    order.actualize_old_orders
   end
 
   def create_buy_orders
