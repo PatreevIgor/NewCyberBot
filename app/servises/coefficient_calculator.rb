@@ -11,7 +11,11 @@ class CoefficientCalculator
   end
 
   def coefficient_current_state(item_hash)
-    dposam(item_hash) <= 0 ? 0 : 100 - (dmam(item_hash) - dposam(item_hash)) * 100 / dmam(item_hash)
+    if dposam(item_hash) <= 0 
+     0
+    else
+     100 - (dmam(item_hash) - dposam(item_hash)) * 100 / dmam(item_hash)
+    end
   end
 
   def coefficient_frequency_purchase(item_hash)

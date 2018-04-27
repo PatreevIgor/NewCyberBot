@@ -5,7 +5,7 @@ class Order < ApplicationRecord
                                                                  instance_id:     order_info_hash(order)[Constant::ITEM_HASH_INSTANCE_ID_KEY],
                                                                  price:           price.price_of_buy_for_order(order),
                                                                  your_secret_key: Rails.application.secrets.your_secret_key))
-    telegram_chat_bot.send_message_create_buy_order
+    # telegram_chat_bot.send_message_create_buy_order
     end
     # users_informator.inform_user_about_created_order
   end
