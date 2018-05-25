@@ -1,0 +1,23 @@
+<html>
+  <head>
+  <title>Alertku - Demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <script type="text/javascript">
+      var n = 0;
+          function alertku(){
+           if(alertku.opt){
+            document.getElementById('alertku_span').innerHTML = n;
+            n++;
+            setTimeout(alertku, 1000);
+           }
+      };
+  </script>
+  </head>
+  <body>
+    <div>
+      <input type="button" value="RUN" onclick="alertku.opt = true; alertku();"> 
+      <input type="button" value="STOP" onclick="alertku.opt = false;"><br>
+      <span id="alertku_span">hum</span>
+    </div>
+  </body>
+</html>
